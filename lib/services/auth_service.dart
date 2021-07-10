@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:app_movil_civil/global/environment.dart';
-import 'package:app_movil_civil/models/oficial.dart';
 import 'package:app_movil_civil/models/persona.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,7 +14,6 @@ class AuthService with ChangeNotifier {
   Usuario usuario;
   Persona persona;
   Civil civil;
-  // Oficial oficial;
 
   bool _autenticando = false;
 
@@ -54,7 +52,6 @@ class AuthService with ChangeNotifier {
       this.usuario = loginResponse.usuario;
       this.persona = loginResponse.persona;
       this.civil = loginResponse.civil;
-      // this.oficial = loginResponse.oficial;
 
       await this._guardarToken(loginResponse.token);
 
@@ -102,7 +99,7 @@ class AuthService with ChangeNotifier {
       this.usuario = loginResponse.usuario;
       this.persona = loginResponse.persona;
       this.civil = loginResponse.civil;
-      // this.oficial = loginResponse.oficial;
+
       await this._guardarToken(loginResponse.token);
       return true;
     } else {
