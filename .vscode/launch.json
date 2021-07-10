@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "app_movil_civil",
+            "request": "launch",
+            "type": "dart"
+        },{
+            "name": "Xiaomi remote",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "192.168.43.1:5555"
+        },
+        {
+            "name": "Xiaomi",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "100d924d"
+        },
+        {
+            "name": "Samsung S20",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554"
+        },
+        {
+            "name": "Pixel 3A XL",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5556"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "All Devices",
+            "configurations": [
+                // "Xiaomi remote",
+                "Samsung S20",
+                "Pixel 3A XL"
+            ]
+        }
+    ]
+}
