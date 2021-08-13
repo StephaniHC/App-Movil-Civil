@@ -106,7 +106,7 @@ Widget _noTienesCuenta(BuildContext context) {
       ),
       GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, 'register_trabajador');
+          Navigator.pushNamed(context, 'register');
         },
         child: Text(
           'Registrate',
@@ -177,7 +177,7 @@ class __FormState extends State<_Form> {
 
                       final loginOk = await authService.login(
                           emailCtrl.text.trim(), passCtrl.text.trim());
-
+                          
                       if (loginOk) {
                         //   notificacion.guardarTokenFCMServices();
                         Navigator.pushNamedAndRemoveUntil(
@@ -186,6 +186,7 @@ class __FormState extends State<_Form> {
                         mostrarAlerta(context, 'Login incorrecto',
                             'Revise sus Credenciales');
                       }
+                      
                     },
             )
           ],

@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:app_movil_civil/models/civil.dart';
-import 'package:app_movil_civil/models/oficial.dart';
+//import 'package:app_movil_civil/models/oficial.dart';
 import 'package:app_movil_civil/models/persona.dart';
 import 'package:app_movil_civil/models/usuario.dart';
 

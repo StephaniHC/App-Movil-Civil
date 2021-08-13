@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
           title: 'Denuncias Civil',
           navigatorKey: navigatorKey,
           // initialRoute: 'register_trabajador',
-          initialRoute: 'loading',
+          initialRoute: 'welcome',
           routes: appRoutes,
           theme: ThemeData(primaryColor: Color.fromARGB(255, 255, 96, 0)),
         ));

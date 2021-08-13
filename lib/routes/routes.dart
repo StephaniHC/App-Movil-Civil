@@ -1,3 +1,4 @@
+import 'package:app_movil_civil/pages/register_stepper_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_movil_civil/pages/loading_page.dart';
@@ -10,4 +11,6 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'login': (BuildContext c) => LoginPage(),
   'home': (BuildContext c) => HomePage(),
   'welcome': (BuildContext c) => WelcomePage(),
+  'register': (BuildContext c) => RegisterPage(),
+ 
 };

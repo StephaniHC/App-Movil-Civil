@@ -38,6 +38,7 @@ dependencies:
   mime_type:
   rxdart: ^0.25.0
   http_parser: ^3.1.4
+  intl: ^0.16.0
   # firebase_messaging: ^7.0.3
 
 dev_dependencies:

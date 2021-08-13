@@ -9,31 +9,37 @@ String civilToJson(Civil data) => json.encode(data.toJson());
 final base_url = Environment.apiUrl;
 
 class Civil {
-  Civil({
-    this.id,
-    this.descripcion,
-    this.reputacion,
-    this.denuncias,
-  });
+    Civil({
+        this.id,
+        this.descripcion,
+        this.reputacion,
+        this.denuncias,
+        this.persona,
+    });
 
-  String id;
-  String descripcion;
-  String reputacion;
-  List<String> denuncias;
+    String id;
+    String descripcion;
+    String reputacion;
+    List<dynamic> denuncias;
+    String persona;
 
-  factory Civil.fromJson(Map<String, dynamic> json) => Civil(
-        id: json["id"],
+    factory Civil.fromJson(Map<String, dynamic> json) => Civil(
+        id: json["_id"],
         descripcion: json["descripcion"],
         reputacion: json["reputacion"],
-        denuncias: List<String>.from(json["denuncias"].map((x) => x)),
-      );
+        denuncias: List<dynamic>.from(json["denuncias"].map((x) => x)),
+        persona: json["persona"],
+    );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
+       Map<String, dynamic> toJson() => {
+        "_id": id,
         "descripcion": descripcion,
         "reputacion": reputacion,
-        "denuncias": denuncias,
-      };
+        "denuncias": List<dynamic>.from(denuncias.map((x) => x)),
+        "persona": persona,
+    };
+
+
 
   // String get imagenUrl {
   //   if (this.img == null) {
@@ -46,4 +52,5 @@ class Civil {
   //     return '$base_url/upload/civils/no-image';
   //   }
   // }
+
 }
