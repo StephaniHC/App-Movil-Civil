@@ -1,8 +1,12 @@
+import 'package:app_movil_civil/bloc/busqueda/busqueda_bloc.dart';
+import 'package:app_movil_civil/bloc/mapa/mapa_bloc.dart';
+import 'package:app_movil_civil/bloc/mi_ubicacion/mi_ubicacion_bloc.dart';
 import 'package:app_movil_civil/routes/routes.dart';
 import 'package:app_movil_civil/services/BottomNavigationBarServices/ui_provider.dart';
 import 'package:app_movil_civil/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -47,13 +51,16 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider(create: (_) => AuthService()),
           ChangeNotifierProvider(create: (_) => UiProvider()),
+          BlocProvider(create: ( _ ) => MiUbicacionBloc() ),
+          BlocProvider(create: ( _ ) => MapaBloc()),
+          BlocProvider(create: ( _ ) => BusquedaBloc()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Denuncias Civil',
           navigatorKey: navigatorKey,
           // initialRoute: 'register_trabajador',
-          initialRoute: 'loading',
+          initialRoute: 'loading1',
           routes: appRoutes,
           theme: ThemeData(primaryColor: Color.fromARGB(255, 255, 96, 0)),
         ));
