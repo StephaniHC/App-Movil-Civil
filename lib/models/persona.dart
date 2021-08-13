@@ -13,47 +13,47 @@ class Persona {
     this.id,
     this.nombre,
     this.apellido,
-    this.ci,
     this.celular,
     this.direccion,
+    this.ci, 
     this.email,
     this.fechaNac,
-    // this.password,
+    this.usuario,
   });
 
   String id;
   String nombre;
   String apellido;
-  String ci;
   String celular;
-  String img;
   String direccion;
+  String ci; 
+  String img;
   String email;
   String fechaNac;
-  // String password;
+  String usuario;
 
   factory Persona.fromJson(Map<String, dynamic> json) => Persona(
-        id: json["id"],
+        id: json["_id"],
         nombre: json["nombre"],
         apellido: json["apellido"],
-        ci: json["ci"],
         celular: json["celular"],
         direccion: json["direccion"],
+        ci: json["ci"],  
         email: json["email"],
         fechaNac: json["fecha_nac"],
-        // // password: json["password"],
+        usuario: json["usuario"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "_id": id,
         "nombre": nombre,
         "apellido": apellido,
-        "ci": ci,
         "celular": celular,
+        "ci": ci,
         "direccion": direccion,
         "email": email,
         "fecha_nac": fechaNac,
-        // // "password": password,
+        "usuario": usuario,
       };
 
   // String get imagenUrl {
@@ -68,3 +68,6 @@ class Persona {
   //   }
   // }
 }
+
+
+

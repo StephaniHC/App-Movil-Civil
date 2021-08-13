@@ -39,7 +39,7 @@ class Validar {
     if (password == password2) {
       return null;
     } else {
-      return 'Contraseña no coincide';
+      return 'La contraseña no coincide';
     }
   }
 
@@ -55,5 +55,13 @@ class Validar {
       return "Campo $nombreCampo es obligatorio *";
     }
     return null;
+  }
+   String validarTelefono(String phone) {
+    final mincaracteres = 6;
+    if (phone.length >= mincaracteres) {
+      return null;
+    } else {
+      return 'Deber tener más de $mincaracteres caracteres';
+    }
   }
 }

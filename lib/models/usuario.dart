@@ -13,38 +13,47 @@ String usuarioToJson(Usuario data) => json.encode(data.toJson());
 final base_url = Environment.apiUrl;
 
 class Usuario {
-  Usuario({
-    this.online,
-    this.nombre,
-    this.email,
-    this.img,
-    this.uid,
-    this.role = "CIVIL_ROLE",
-  });
+    Usuario({
+        this.estado,
+        this.role,
+        this.email,
+        this.createdAt,
+        this.updatedAt,
+        this.uid,
+        this.img,
+    });
 
-  bool online;
-  String nombre;
-  String email;
-  String img;
-  String uid;
-  String role;
+ 
+    String estado;
+    String role;
+    String email;
+    DateTime createdAt;
+    DateTime updatedAt;
+    String uid;
+    String img;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        online: json["online"],
-        nombre: json["nombre"],
-        email: json["email"],
-        img: json["img"],
-        uid: json["uid"],
+      
+        estado: json["estado"],
         role: json["role"],
+        email: json["email"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        uid: json["uid"],
+        img: json["img"],
       );
 
   Map<String, dynamic> toJson() => {
-        "online": online,
-        "nombre": nombre,
-        "email": email,
-        "img": img,
-        "uid": uid,
+       
+     
+        "estado": estado,
         "role": role,
+        "email": email,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "uid": uid,
+        "img": img,
+        
       };
 
   // String get imagenUrl {

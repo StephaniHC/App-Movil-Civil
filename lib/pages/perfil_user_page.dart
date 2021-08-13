@@ -88,7 +88,7 @@ class _PerfilPageState extends State<PerfilUserPage> {
           delegate: CustomSliverAppBar(
               expandedHeight: expandedHeight,
               title: '',
-              subtitle: usuario?.nombre ?? "nulo",
+              subtitle: usuario?.email ?? "nulo",
               fotoUrl: usuario?.img ?? "",
               cards: [
                 CustomCard(

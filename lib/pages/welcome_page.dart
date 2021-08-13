@@ -66,7 +66,7 @@ class WelcomePage extends StatelessWidget {
                     color: Colors.white,
                     textColor: color,
                     onPressed: () {
-                      Navigator.pushNamed(context, 'register_trabajador');
+                      Navigator.pushNamed(context, 'register'); 
                     }),
               ],
             ),
