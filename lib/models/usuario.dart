@@ -13,27 +13,25 @@ String usuarioToJson(Usuario data) => json.encode(data.toJson());
 final base_url = Environment.apiUrl;
 
 class Usuario {
-    Usuario({
-        this.estado,
-        this.role,
-        this.email,
-        this.createdAt,
-        this.updatedAt,
-        this.uid,
-        this.img,
-    });
+  Usuario({
+    this.estado,
+    this.role,
+    this.email,
+    this.createdAt,
+    this.updatedAt,
+    this.uid,
+    this.img,
+  });
 
- 
-    String estado;
-    String role;
-    String email;
-    DateTime createdAt;
-    DateTime updatedAt;
-    String uid;
-    String img;
+  String estado;
+  String role;
+  String email;
+  DateTime createdAt;
+  DateTime updatedAt;
+  String uid;
+  String img;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-      
         estado: json["estado"],
         role: json["role"],
         email: json["email"],
@@ -44,8 +42,6 @@ class Usuario {
       );
 
   Map<String, dynamic> toJson() => {
-       
-     
         "estado": estado,
         "role": role,
         "email": email,
@@ -53,18 +49,9 @@ class Usuario {
         "updatedAt": updatedAt.toIso8601String(),
         "uid": uid,
         "img": img,
-        
       };
 
-  // String get imagenUrl {
-  //   if (this.img == null) {
-  //     return '$base_url/upload/usuarios/no-image';
-  //   } else if (this.img.contains('https')) {
-  //     return this.img;
-  //   } else if (this.img != null) {
-  //     return '$base_url/upload/usuarios/${this.img}';
-  //   } else {
-  //     return '$base_url/upload/usuarios/no-image';
-  //   }
-  // }
+  String get imagenUrl {
+    return '$base_url/uploads/usuarios/no-image';
+  }
 }

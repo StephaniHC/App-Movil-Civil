@@ -7,13 +7,16 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
   final String title;
   final String subtitle;
   final String fotoUrl;
+  final Function logout;
 
-  CustomSliverAppBar(
-      {@required this.expandedHeight,
-      @required this.cards,
-      @required this.title,
-      @required this.subtitle,
-      @required this.fotoUrl});
+  CustomSliverAppBar({
+    @required this.expandedHeight,
+    @required this.cards,
+    @required this.title,
+    @required this.subtitle,
+    @required this.fotoUrl,
+    this.logout,
+  });
 
   @override
   Widget build(
@@ -76,6 +79,36 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
                         fontSize: 23,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          // top: expandedHeight / 7 - shrinkOffset,
+
+          top: expandedHeight * .3 -
+              MediaQuery.of(context).padding.top -
+              shrinkOffset,
+          // top: MediaQuery.of(context).padding.top - shrinkOffset,
+          left: MediaQuery.of(context).size.width * .05,
+          right: MediaQuery.of(context).size.width * .05,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Opacity(
+                    opacity: (1 - shrinkOffset / expandedHeight),
+                    child: ElevatedButton(
+                      // style: TextButton.styleFrom(
+                      //     backgroundColor: Colors.blue, primary: Colors.white),
+                      onPressed: logout,
+                      child: Icon(
+                        Icons.logout,
                       ),
                     ),
                   ),

@@ -4,6 +4,8 @@ import 'package:app_movil_civil/bloc/mi_ubicacion/mi_ubicacion_bloc.dart';
 import 'package:app_movil_civil/routes/routes.dart';
 import 'package:app_movil_civil/services/BottomNavigationBarServices/ui_provider.dart';
 import 'package:app_movil_civil/services/auth_service.dart';
+import 'package:app_movil_civil/services/denuncia_service.dart';
+import 'package:app_movil_civil/services/denuncia_solicitud_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,10 +52,12 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthService()),
+          ChangeNotifierProvider(create: (_) => DenunciaService()),
+          ChangeNotifierProvider(create: (_) => DenunciaSolicitudService()),
           ChangeNotifierProvider(create: (_) => UiProvider()),
-          BlocProvider(create: ( _ ) => MiUbicacionBloc() ),
-          BlocProvider(create: ( _ ) => MapaBloc()),
-          BlocProvider(create: ( _ ) => BusquedaBloc()),
+          BlocProvider(create: (_) => MiUbicacionBloc()),
+          BlocProvider(create: (_) => MapaBloc()),
+          BlocProvider(create: (_) => BusquedaBloc()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

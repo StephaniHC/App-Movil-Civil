@@ -17,7 +17,18 @@ class HomePage extends StatelessWidget {
     // final notificacion =
     // Provider.of<NotificationsService>(context, listen: false);
     return Scaffold(
-        bottomNavigationBar: CustomNavigationBar(), body: _HomePageBody());
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, 'denuncia_form');
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+          tooltip: 'Increment',
+          child: Icon(Icons.policy_rounded),
+          elevation: 2.0,
+        ),
+        bottomNavigationBar: CustomNavigationBar(),
+        body: _HomePageBody());
   }
 }
 
