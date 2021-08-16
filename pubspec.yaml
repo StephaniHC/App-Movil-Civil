@@ -47,6 +47,9 @@ dependencies:
   dio: ^3.0.10
   animate_do: ^1.7.2
   polyline: ^1.0.2
+  get: ^4.3.8
+  shared_preferences: ^2.0.6
+  get_storage: ^2.0.3
   # firebase_messaging: ^7.0.3
 
 dev_dependencies:

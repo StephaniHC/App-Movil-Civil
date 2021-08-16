@@ -3,6 +3,7 @@ import 'package:app_movil_civil/pages/register_stepper_page.dart';
 import 'package:app_movil_civil/pages/acceso_gps_page.dart';
 import 'package:app_movil_civil/pages/loading_page1.dart';
 import 'package:app_movil_civil/pages/mapa_page.dart';
+import 'package:app_movil_civil/pages/setting_page.dart';
 import 'package:app_movil_civil/pages/ubicacion_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'home': (BuildContext c) => HomePage(),
   'welcome': (BuildContext c) => WelcomePage(),
   'register': (BuildContext c) => RegisterPage(),
+  'ajustes':(BuildContext c)=>SettingPage(),
+ 
   'denuncia_form': (BuildContext c) => DenunciaFormPage(),
   'ubicacion': (BuildContext c) => UbicacionPage(),
   'mapa': (_) => MapaPage(),

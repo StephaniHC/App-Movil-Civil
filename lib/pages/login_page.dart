@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final passCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    _systemChromeColor(Brightness.dark);
+   _systemChromeColor(Brightness.dark);
     final size = MediaQuery.of(context).size;
     final color = Theme.of(context).primaryColor;
 
@@ -152,6 +152,7 @@ class __FormState extends State<_Form> {
               labelText: 'Email',
               keyboardType: TextInputType.emailAddress,
               textController: emailCtrl,
+              
             ),
             SizedBox(height: 20),
             FormFieldInput(

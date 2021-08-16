@@ -69,36 +69,6 @@ class AuthService with ChangeNotifier {
     }
   }
 
-  // Future register(String nombre, String email, String password) async {
-  //   this.autenticando = true;
-
-  //   final data = {
-  //     'nombre': nombre,
-  //     'email': email,
-  //     'password': password,
-  //     'role': 'CLIENT-ROLE'
-  //   };
-
-  //   final resp = await http.post('${Environment.apiUrl}/usuarios',
-  //       body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-
-  //   this.autenticando = false;
-
-  //   if (resp.statusCode == 200) {
-  //     final loginResponse = loginResponseFromJson(resp.body);
-  //     this.usuario = loginResponse.usuario;
-  //     await this._guardarToken(loginResponse.token);
-
-  //     return true;
-  //   } else {
-  //     final respBody = jsonDecode(resp.body);
-  //     return respBody['msg'];
-  //   }
-  // }
-
-
-
-
 
   Future  register(String email, String password, String nombre, String apellido, String celular, String direccion, String ci, String fechanac) async {
     this.autenticando = true;

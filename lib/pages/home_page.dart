@@ -1,3 +1,4 @@
+import 'package:app_movil_civil/pages/setting_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,27 +54,27 @@ class _HomePageBody extends StatelessWidget {
         ); //MapasPage();
 
       case 1:
-        // scanListProvider.cargarScanPorTipo('http');
-        final authService = Provider.of<AuthService>(context);
-        // final notificacion =
-        // Provider.of<NotificationsService>(context, listen: false);
-        return Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RaisedButton(
-                child: Text('Logout'),
-                onPressed: () async {
-                  // await notificacion.borrarTokenFCMServices();
-                  authService.logout();
-                  Navigator.pushReplacementNamed(context, 'login');
-                },
-              ),
-              Text('Logeado')
-            ],
-          ),
-        ); //DireccionesPage();
-
+        // // scanListProvider.cargarScanPorTipo('http');
+        // final authService = Provider.of<AuthService>(context);
+        // // final notificacion =
+        // // Provider.of<NotificationsService>(context, listen: false);
+        // return Container(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       RaisedButton(
+        //         child: Text('Logout'),
+        //         onPressed: () async {
+        //           // await notificacion.borrarTokenFCMServices();
+        //           authService.logout();
+        //           Navigator.pushReplacementNamed(context, 'login');
+        //         },
+        //       ),
+        //       Text('Logeado')
+        //     ],
+        //   ),
+        // ); //DireccionesPage();
+        return SettingPage();
       case 2:
         return PerfilUserPage();
       case 3:
