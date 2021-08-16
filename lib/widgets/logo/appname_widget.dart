@@ -16,7 +16,7 @@ class AppNameWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Golden',
+              'Yo',
               style: TextStyle(
                 fontSize: 34,
                 fontFamily: "Cabin",
@@ -24,7 +24,7 @@ class AppNameWidget extends StatelessWidget {
                 color: Color.fromARGB(255, 252, 96, 17),
               ),
             ),
-            Text('Hands',
+            Text('Oficial',
                 style: TextStyle(
                     fontSize: 34,
                     fontFamily: "Cabin",

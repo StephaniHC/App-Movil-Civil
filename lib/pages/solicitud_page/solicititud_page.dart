@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:app_movil_civil/bloc/busqueda/busqueda_bloc.dart';
 import 'package:app_movil_civil/bloc/mapa/mapa_bloc.dart';
+import 'package:app_movil_civil/pages/denuncias/denucia_form_page.dart';
 import 'package:app_movil_civil/pages/mapa_page.dart';
 import 'package:app_movil_civil/pages/tapbar_page.dart';
 import 'package:app_movil_civil/services/auth_service.dart';
@@ -36,7 +37,6 @@ class HistorialPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data) {
-                  denunciaSolicitudService.limpiarDenuncia();
                   return Column(
                     children: [
                       Container(
@@ -86,6 +86,7 @@ class HistorialPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data) {
+                  denunciaSolicitudService.limpiarDenuncia();
                   return Column(
                     children: [
                       Container(
@@ -99,14 +100,15 @@ class HistorialPage extends StatelessWidget {
                               authService.persona.apellido,
                           subtitle: authService.persona.ci,
                           description:
-                              denunciaSolicitudService.denuncia.descripcion),
+                              denunciaService.denuncia?.descripcion ?? ''),
                       CustomListilePerfil(
                           img: denunciaService.usuario.img,
                           header: "Aceptado por:",
                           title: denunciaService.persona.nombre +
                               denunciaService.persona.apellido,
                           subtitle: denunciaService.persona.ci,
-                          description: denunciaService.denuncia?.descripcion),
+                          description: denunciaService.denuncia?.observacion ??
+                              "Sin observacion aun"),
                       Divider(
                         height: 15,
                       ),
@@ -212,7 +214,8 @@ class HistorialPage extends StatelessWidget {
                             offset: Offset(0, -12),
                             child: BounceInDown(
                                 from: 200,
-                                child: Icon(Icons.location_on, size: 50))),
+                                child: Icon(Icons.location_on,
+                                    size: 50, color: Colors.red))),
                       ),
                     ],
                   )),
@@ -224,7 +227,7 @@ class HistorialPage extends StatelessWidget {
     return content;
   }
 
-  String centrar(BuildContext context, String coodernadas) {
+  centrar(BuildContext context, String coodernadas) {
     var coordenadasString = coodernadas.split(',');
     LatLng destino = LatLng(
         double.parse(coordenadasString[0]), double.parse(coordenadasString[1]));

@@ -2,49 +2,44 @@ import 'package:app_movil_civil/models/search_result.dart';
 import 'package:flutter/material.dart';
 
 class SearchDestination extends SearchDelegate<SearchResult> {
-
-   @override
+  @override
   final String searchFieldLabel;
 
-  SearchDestination(): this.searchFieldLabel = 'Buscar...';
+  SearchDestination() : this.searchFieldLabel = 'Buscar...';
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: Icon( Icons.clear ), 
-        onPressed: () => this.query = ''
-      )
+      IconButton(icon: Icon(Icons.clear), onPressed: () => this.query = '')
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
-     return IconButton(
-      icon: Icon( Icons.arrow_back_ios ), 
-      onPressed: () => this.close(context, SearchResult(cancelo: true ))
-    );
+    return IconButton(
+        icon: Icon(Icons.arrow_back_ios),
+        onPressed: () => this.close(context, SearchResult(cancelo: true)));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-     return 
-      Text('Build Result');
+    return Text('Build Result');
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-     return ListView(
+    return ListView(
       children: [
-
         ListTile(
-          leading: Icon( Icons.location_on ),
+          leading: Icon(
+            Icons.location_on,
+            color: Colors.red,
+          ),
           title: Text('Colocar ubicación manualmente'),
           onTap: () {
-            this.close(context, SearchResult( cancelo: false, manual: true )); 
+            this.close(context, SearchResult(cancelo: false, manual: true));
           },
         )
-
       ],
     );
   }

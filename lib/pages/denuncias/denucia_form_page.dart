@@ -218,10 +218,11 @@ class __FormState extends State<_Form> {
 
     if (issaved) {
       //   notificacion.guardarTokenFCMServices();
-      mostrarAlerta(context, 'Denuncia Enviada',
-          'Tu denuncia ha sido notificada, un oficial llegara pronto');
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'home', (Route<dynamic> route) => false);
+      // mostrarAlerta(context, 'Denuncia Enviada',
+      //     'Tu denuncia ha sido notificada, un oficial llegara pronto');
+      Navigator.pop(context);
+      // Navigator.pus(
+      //     context, 'home');
     } else {
       mostrarAlerta(context, 'Denuncia no enviada',
           'Tu denuncia no ha sido enviada, verifica la los campos requeridos');
@@ -262,7 +263,11 @@ class __FormState extends State<_Form> {
                             offset: Offset(0, -12),
                             child: BounceInDown(
                                 from: 200,
-                                child: Icon(Icons.location_on, size: 50))),
+                                child: Icon(
+                                  Icons.location_on,
+                                  size: 50,
+                                  color: Colors.red,
+                                ))),
                       ),
                     ],
                   )),

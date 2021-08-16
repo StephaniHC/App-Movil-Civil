@@ -107,46 +107,40 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     kilometros = kilometros / 100;
 
     // Icono destino
-    final iconoInicio  = await getAssetImageMarker('inicio');
-    final iconoDestino  = await getAssetImageMarker('destino');
-    
+    final iconoInicio = await getAssetImageMarker('inicio');
+    final iconoDestino = await getAssetImageMarker('destino');
+
     //marcador inicio
     final markerInicio = new Marker(
-      icon: iconoInicio,
-       anchor: Offset(0.0, 1.0),
-       markerId: MarkerId('inicio'),
-       position: event.rutaCoordenadas[0],
-       infoWindow: InfoWindow(
-        title: 'Mi Ubicación',
-        snippet: 'Duración recorrido: ${ (event.duracion / 60).floor() } minutos',
-       )
-    );
+        icon: iconoInicio,
+        anchor: Offset(0.0, 1.0),
+        markerId: MarkerId('inicio'),
+        position: event.rutaCoordenadas[0],
+        infoWindow: InfoWindow(
+          title: 'Mi Ubicación',
+          snippet:
+              'Duración recorrido: ${(event.duracion / 60).floor()} minutos',
+        ));
 
     final markerDestino = new Marker(
-      icon: iconoDestino,
-      markerId: MarkerId('destino'),
-      position: event.rutaCoordenadas[ event.rutaCoordenadas.length - 1],
-      anchor: Offset(0.1, 0.90),
-      infoWindow: InfoWindow(
-        title: event.nombreDestino,
-        snippet: 'Distancia: $kilometros Km',
-      )
-      );  
+        icon: iconoDestino,
+        markerId: MarkerId('destino'),
+        position: event.rutaCoordenadas[event.rutaCoordenadas.length - 1],
+        anchor: Offset(0.1, 0.90),
+        infoWindow: InfoWindow(
+          title: event.nombreDestino,
+          snippet: 'Distancia: $kilometros Km',
+        ));
 
-       final newMarkers = { ...state.markers };
-        newMarkers['inicio']   = markerInicio;
-        newMarkers['destino']  = markerDestino;
+    final newMarkers = {...state.markers};
+    newMarkers['inicio'] = markerInicio;
+    newMarkers['destino'] = markerDestino;
 
-        Future.delayed(Duration(milliseconds: 300)).then(
-      (value) {
-         //_mapController.showMarkerInfoWindow(MarkerId('inicio'));
-         _mapController.showMarkerInfoWindow(MarkerId('destino'));
-      }
-    );
+    Future.delayed(Duration(milliseconds: 300)).then((value) {
+      //_mapController.showMarkerInfoWindow(MarkerId('inicio'));
+      _mapController.showMarkerInfoWindow(MarkerId('destino'));
+    });
 
-    yield state.copyWith(
-      polylines: currentPolylines,
-      markers: newMarkers
-    );
+    yield state.copyWith(polylines: currentPolylines, markers: newMarkers);
   }
 }

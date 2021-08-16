@@ -35,8 +35,8 @@ class Usuario {
         estado: json["estado"],
         role: json["role"],
         email: json["email"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        // createdAt: DateTime.parse(json["createdAt"]),
+        // updatedAt: DateTime.parse(json["updatedAt"]),
         uid: json["uid"],
         img: json["img"],
       );

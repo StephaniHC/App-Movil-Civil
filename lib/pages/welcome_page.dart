@@ -40,7 +40,7 @@ class WelcomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
             alignment: Alignment.center,
             child: Text(
-              'Adquiere los servicios de acuerdo a tus necesidades,  mas de 1000 trabajadores esperan por Ti.',
+              'Realiza tus denuncias o reportes mas de 1000 oficiales esperan por Tí',
               textAlign: TextAlign.center,
               style: TextStyle(
                   height: 1.3,
@@ -66,7 +66,7 @@ class WelcomePage extends StatelessWidget {
                     color: Colors.white,
                     textColor: color,
                     onPressed: () {
-                      Navigator.pushNamed(context, 'register'); 
+                      Navigator.pushNamed(context, 'register');
                     }),
               ],
             ),
