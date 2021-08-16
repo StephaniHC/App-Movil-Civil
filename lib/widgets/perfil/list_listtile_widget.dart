@@ -17,7 +17,7 @@ class DividerSectionWidget extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               this.title ?? "Informacion de usuario",
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              //style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ),
           this.children ?? Text('requiere una lista de ListTile')

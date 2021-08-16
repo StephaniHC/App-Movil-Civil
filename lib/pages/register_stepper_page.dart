@@ -34,7 +34,9 @@ final formKey = GlobalKey<FormState>();
 File _picture;
 File _pictureCard;
 File _gesturePicture;
-String _verificado="false";
+bool _loading=false;
+int _validarcarnet=1;
+int _validarGesture=1;
   @override
   Widget build(BuildContext context) {
 
@@ -64,40 +66,28 @@ String _verificado="false";
             ), 
               onPressed: (){}
               ),
-            
+             
            
           ],
         );
 
       },
         steps: _mySteps(),
+
         currentStep: this._currentStep,
         onStepTapped: (step){
-          setState(() {
+          // setState(() {
              
-            this._currentStep = step;
-          });
+          //   this._currentStep = step;
+          // });
         },
         onStepContinue: (){
+
           setState(() {
-            if(this._currentStep < this._mySteps().length - 1 && formKey.currentState.validate()){
-           
-              this._currentStep = this._currentStep + 1;
-            }else{
-              //Logic to check if everything is completed
-              //LOGIN
-              if(_verificado=="false"){
-                mostrarAlerta(context, "Fallo en el registro", 
-                "Complete la verificacion de gestos para continuar");
-              }else{
-                //LOGIN
-                mostrarAlerta(context, "Registro exitoso", 
-                "Disfrute de todos nuestro servicios");
-                Navigator.pushNamedAndRemoveUntil(
-                            context, 'login', (Route<dynamic> route) => false);
-              }
-             
+            if(this._currentStep < this._mySteps().length - 1 ){
+                  this._currentStep = this._currentStep + 1;          
             }
+            
           });
         },
         onStepCancel: () {
@@ -155,6 +145,8 @@ String _verificado="false";
                 },
               ),
           _loginForm(context),
+          SizedBox(height:5.0),
+          _progressIndicator(),
         SizedBox(height:5.0),
               ],
         ),   
@@ -201,6 +193,7 @@ String _verificado="false";
                  SizedBox(height:10.0),
                 //NOMBRES
             FormFieldInput(
+                  suffixIcon: Icon(Icons.person),
                   placeholder: 'Nombres',
                   labelText: 'Nombres',
                   onChanged: null,
@@ -212,6 +205,7 @@ String _verificado="false";
            SizedBox(height:10.0),
               //APELLIDOS
             FormFieldInput(
+              suffixIcon: Icon(Icons.person_outline),
                 placeholder: 'Apellidos',
                 labelText: 'Apellidos',
                 onChanged: null,
@@ -236,6 +230,7 @@ String _verificado="false";
          SizedBox(height:10.0),
               //TELEFONO
             FormFieldInput(
+              suffixIcon: Icon(Icons.phone),
               validator: (value) {
                 return Validar().validarTelefono(value);
               },
@@ -248,6 +243,7 @@ String _verificado="false";
              SizedBox(height:10.0),
               //DIRECCION
               FormFieldInput(
+                suffixIcon: Icon(Icons.map_outlined),
                 placeholder: 'Direccion',
                 labelText: 'Direccion',
                 onChanged: null,
@@ -259,6 +255,7 @@ String _verificado="false";
              SizedBox(height:10.0),
               //CONTRASENA
              FormFieldInput(
+               suffixIcon: Icon(Icons.lock),
               validator: (value) {
                 return Validar().validarPassword(value);
               },
@@ -271,6 +268,7 @@ String _verificado="false";
              SizedBox(height:10.0),
               //CONFIRMAR CONTRASENA
             FormFieldInput(
+              suffixIcon: Icon(Icons.lock_outline),
               validator: (value) {
                 return Validar().confirmarPassword(passwordConfiController.text,passwordController.text);
               },
@@ -293,9 +291,14 @@ String _verificado="false";
 
  _nextSubmit(context,VoidCallback onStepContinue)async {
    final authService = Provider.of<AuthService>(context, listen:false);
-//TODO: Register Form
+
 if(_currentStep==0){
-final registerOk= await authService.register(
+                     
+if(!formKey.currentState.validate() || _picture==null){
+  mostrarAlerta(context, 'Fallo en el registro',
+        'Debe completar los campos requeridos para continuar');
+}else{
+  final registerOk= await authService.register(
   emailController.text.trim(),
   passwordController.text.trim(),
    nameController.text.trim(), 
@@ -304,46 +307,91 @@ final registerOk= await authService.register(
     adressController.text.trim(), 
     ciController.text.trim(), 
     dateController.text.trim(), 
-    );                      
+    ); 
 
+    if (registerOk == "true" ) {
+      //ADD imageKey to collection and Create collection
+          setState(() {
+            _loading=true;
+          });
+      final uploadImageToCollection= await authService.uploadImage(
+        authService.usuario.uid,
+        authService.imageKey);
 
-if (registerOk == "true" ) {
-  //ADD imageKey to collection and Create collection
-  final uploadImageToCollection= await authService.uploadImage(authService.usuario.uid,authService.imageKey);
-   if(uploadImageToCollection== "true"){
-      onStepContinue();
+      if(uploadImageToCollection== "true"){
+        setState(() {
+        _loading=false;
+        onStepContinue();
+      });
+      
    }else{
      mostrarAlerta(context, 'Fallo en el registro',
         'Error en la subida de imagen');
+         setState(() {
+    _loading=false;
+  });
    }
 
   } else {
+   
        mostrarAlerta(context, 'Fallo en el registro',
        registerOk);
+        setState(() {
+    _loading=false;
+    });
 
  }
+
+}
 }//END  STEP 0
+
+
+
 if(_currentStep==1){
+
+  setState(() {
+    _validarcarnet++;
+  });
+  
+
+if(_validarcarnet>2 && _pictureCard==null){
+      mostrarAlerta(context, 'Fallo en la verificacion',
+              'Tiene que subir la foto de su carnet para continuar');
+}
+
   if(_pictureCard!=null){
 
  final verifyCard= await authService.verifyCard(authService.usuario.uid, authService.carnetKey);
+ setState(() {
+   _loading=true;
+ });
   if(verifyCard=="true"){
     mostrarAlerta(context, 'Verificacion exitosa',
-       "Complete el registro para finalizar");
-       if(verifyCard=="true"){
-         final uploadIMtoUser=await authService.addImageToUser(authService.usuario.uid, authService.imageKey);
+       "Tomese una selfie con los ojos cerrados y sonriendo");
+        setState(() {
+          _loading=false;
+        });
+
+         final uploadIMtoUser=await authService.addImageToUser(
+           authService.usuario.uid, 
+           authService.imageKey
+           );
+
         if(uploadIMtoUser=="true"){
             onStepContinue();
         }else{
-          mostrarAlerta(context, 'Verificacion exitosa',
-       uploadIMtoUser);
+          mostrarAlerta(context, 'Algo salio mal',
+         uploadIMtoUser);
         }
         
-       }
+       
        
   }else{
-     mostrarAlerta(context, 'Verificacion exitosa',
-       verifyCard);
+    setState(() {
+          _loading=false;
+        });
+     mostrarAlerta(context, 'Fallo en la verificacion',
+       "Intente nuevamente");
     
   }
 
@@ -359,21 +407,47 @@ if(_currentStep==1){
 }
 if(_currentStep==2){
 
+   setState(() {
+    _validarGesture++;
+  });
+
+  if(_validarGesture>2 && _gesturePicture==null){
+      mostrarAlerta(context, 'Fallo en la verificacion',
+              'Tiene que subir una foto para continuar');
+}
+
   if(_gesturePicture!=null){
     
  final verifyGesture= await authService.verifyGesture(authService.gestureKey);
   if(verifyGesture=="true"){
-           setState(() {
-          _verificado="true";
-              });
+     
+      if (Platform.isAndroid) {
+    return showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("Registro exitoso"),
+              content: Text("Ingrese para continuar"),
+              actions: <Widget>[
+                MaterialButton(
+                    child: Text('Ok'),
+                    elevation: 5,
+                    textColor: Colors.blue,
+                    onPressed: ()=> Navigator.pushNamedAndRemoveUntil(
+                           context, 'login', (Route<dynamic> route) => false)
+                 ) ]
+            )
+            );
+  }
+
              onStepContinue();
           
   }else{
      mostrarAlerta(context, 'Fallo en la verificacion',
-      "La verificacion falló! intente nuevamente");
-       
+      "La verificacion falló! intente nuevamente");    
+       }
   }
-  }
+
+
 
 }
 
@@ -388,6 +462,7 @@ if(_currentStep==2){
 
 
 Future _uploadImage(BuildContext context, String filepath) async {
+
   final authService = Provider.of<AuthService>(context, listen:false);
   final url= Uri.parse('${Environment.apiUrl}/upload/60bb84fc89df2dce8c758bfc/1');
   final uploadRequest=http.MultipartRequest('POST', url );
@@ -399,21 +474,24 @@ Future _uploadImage(BuildContext context, String filepath) async {
   
   if(resp.statusCode == 200){
   final respBody = jsonDecode(resp.body);
-  if(_pictureCard!=null){
+  if(_pictureCard!=null && _currentStep==1){
    
     authService.carnetKey=respBody['key'];
     authService.carnetURL=respBody['url'];
    
-  }
-  if(_picture!=null){
+  }else{
+  if(_picture!=null && _currentStep==0){
     authService.imageKey=respBody['key'];
     authService.imageUrl=respBody['url'];
-    }
     
- if(_gesturePicture!=null){
+    }else{
+      if(_gesturePicture!=null && _currentStep==2){
     authService.gestureKey=respBody['key'];
     authService.gestureURL=respBody['url'];
  } 
+    }
+  }  
+ 
   
   
   
@@ -426,7 +504,7 @@ Future _uploadImage(BuildContext context, String filepath) async {
 
 
 Widget _imageCard(BuildContext context) {
-   final authService = Provider.of<AuthService>(context, listen:false);
+   
   return Column(
     children: [
       Card(
@@ -454,14 +532,14 @@ Widget _imageCard(BuildContext context) {
         ),
         IconButton(
                 icon:Icon( 
-                  FontAwesomeIcons.images,
+                  FontAwesomeIcons.camera,
                   size: 30.0,
                 ),
                 onPressed: () async{
 
                  final picker=new ImagePicker();
                  final PickedFile  pickedFile= await picker.getImage(
-                   source: ImageSource.gallery
+                   source: ImageSource.camera
                    ); 
 
                   if(pickedFile!=null){
@@ -474,6 +552,7 @@ Widget _imageCard(BuildContext context) {
                 },
               ),
         SizedBox(height: 5.0),
+        _progressIndicator(),
                 
     ],
   );
@@ -484,7 +563,8 @@ Widget _imageCard(BuildContext context) {
 Widget _analisisGestos(BuildContext context){
 return Column(
     children: [
-  
+        Text("Tomese un selfie con los ojos cerrados y con una sonrisa :)",textAlign: TextAlign.center),
+        SizedBox(height:25.0),
        Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child:SizedBox(
@@ -523,6 +603,14 @@ return Column(
     ],
   );
 }
+
+ Widget _progressIndicator() {
+
+   return _loading? CircularProgressIndicator(
+            color:Colors.red
+          ):
+          Container();
+ }
 
 }
 
