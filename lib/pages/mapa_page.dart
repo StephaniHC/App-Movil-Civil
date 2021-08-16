@@ -33,16 +33,16 @@ class _MapaPageState extends State<MapaPage> {
         children: [
           BlocBuilder<MiUbicacionBloc, MiUbicacionState>(
               builder: (_, state) => crearMapa(state)),
-          Positioned(top: 10, child: SearchBar()),
+          // Positioned(top: 10, child: SearchBar()),
           MarcadorManual(),
         ],
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          BtnUbicacion(),
-          BtnSeguirUbicacion(),
-          BtnMiRuta(),
+          // BtnUbicacion(),
+          // BtnSeguirUbicacion(),
+          // BtnMiRuta(),
         ],
       ),
     );
@@ -69,13 +69,11 @@ class _MapaPageState extends State<MapaPage> {
           polylines: mapaBloc.state.polylines.values.toSet(),
           markers: mapaBloc.state.markers.values.toSet(),
           onCameraMove: (cameraPosition) {
-        // cameraPosition.target = LatLng central del mapa
+            // cameraPosition.target = LatLng central del mapa
             mapaBloc.add(OnMovioMapa(cameraPosition.target));
+          },
+        );
       },
     );
-      },
-    );
-
-    
   }
 }

@@ -18,6 +18,7 @@ Widget vistaFoto(String fotoUrl, double height, double padding) {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
+            width: 100,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),

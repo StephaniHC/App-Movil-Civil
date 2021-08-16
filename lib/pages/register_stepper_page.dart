@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
 class RegisterPage extends StatefulWidget {
   //const RegisterPage({ Key? key }) : super(key: key);
 
@@ -39,10 +40,6 @@ int _validarcarnet=1;
 int _validarGesture=1;
   @override
   Widget build(BuildContext context) {
-
-
-
-
     return Scaffold(
       appBar: new AppBar(
         title: new Text('Registrarse'),
@@ -92,9 +89,9 @@ int _validarGesture=1;
         },
         onStepCancel: () {
           setState(() {
-            if(this._currentStep > 0){
+            if (this._currentStep > 0) {
               this._currentStep = this._currentStep - 1;
-            }else{
+            } else {
               this._currentStep = 0;
             }
           });
@@ -103,39 +100,38 @@ int _validarGesture=1;
     );
   }
 
-  List<Step> _mySteps(){
+  List<Step> _mySteps() {
     List<Step> _steps = [
       Step(
         title: Text('Datos Personales'),
         content: Column(
-          children:<Widget>[
+          children: <Widget>[
             CircleAvatar(
               radius: 70.0,
-              child:ClipOval(
-                child:SizedBox(
-                  width: 180.0,
-                  height: 180.0,
-                  child:(_picture!=null)?
-                  Image.file(_picture,fit: BoxFit.fill):
-                  Image.network("https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
-                                        fit: BoxFit.fill,),
-                )
-              ),
+              child: ClipOval(
+                  child: SizedBox(
+                width: 180.0,
+                height: 180.0,
+                child: (_picture != null)
+                    ? Image.file(_picture, fit: BoxFit.fill)
+                    : Image.network(
+                        "https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
+                        fit: BoxFit.fill,
+                      ),
+              )),
             ),
             IconButton(
-                icon:Icon( 
-                  FontAwesomeIcons.camera,
-                  size: 30.0,
-                ),
-                onPressed: () async{
-                
-                 final picker=new ImagePicker();
+              icon: Icon(
+                FontAwesomeIcons.camera,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                final picker = new ImagePicker();
 
-                 final PickedFile  pickedFile= await picker.getImage(
-                   source: ImageSource.camera
-                   ); 
+                final PickedFile pickedFile =
+                    await picker.getImage(source: ImageSource.camera);
 
-                  if(pickedFile!=null){
+                if (pickedFile != null) {
                   setState(() {
                       _picture=File.fromUri(Uri(path:pickedFile.path)); 
                        _uploadImage(context,pickedFile.path);       
@@ -165,15 +161,11 @@ int _validarGesture=1;
     ];
     return _steps;
   }
-      
-  
 
-
-   Widget _loginForm(BuildContext context, ) {
-
-  
-
-   return Container(
+  Widget _loginForm(
+    BuildContext context,
+  ) {
+    return Container(
       child: Form(
         key: formKey,
         child: Column(
@@ -211,23 +203,24 @@ int _validarGesture=1;
                 onChanged: null,
                 textController: surnameController,
                 validator: (value) {
-                return Validar().validarCampoRequerido(value, 'Apellidos');
-              },
-         ), 
-          SizedBox(height:10.0),
+                  return Validar().validarCampoRequerido(value, 'Apellidos');
+                },
+              ),
+              SizedBox(height: 10.0),
               //FECHA DE NACIMIENTO
-            FormFieldInput(
-              suffixIcon: Icon(Icons.calendar_today_sharp),
+              FormFieldInput(
+                suffixIcon: Icon(Icons.calendar_today_sharp),
                 placeholder: 'Fecha de Nacimiento',
                 labelText: 'Fecha de Nacimiento',
                 keyboardType: TextInputType.datetime,
                 onChanged: null,
                 textController: dateController,
                 validator: (value) {
-                return Validar().validarCampoRequerido(value, 'Fecha de nacimiento');
-              },
-        ),
-         SizedBox(height:10.0),
+                  return Validar()
+                      .validarCampoRequerido(value, 'Fecha de nacimiento');
+                },
+              ),
+              SizedBox(height: 10.0),
               //TELEFONO
             FormFieldInput(
               suffixIcon: Icon(Icons.phone),
@@ -249,10 +242,10 @@ int _validarGesture=1;
                 onChanged: null,
                 textController: adressController,
                 validator: (value) {
-                return Validar().validarCampoRequerido(value, 'Direccion');
-              },
-            ),
-             SizedBox(height:10.0),
+                  return Validar().validarCampoRequerido(value, 'Direccion');
+                },
+              ),
+              SizedBox(height: 10.0),
               //CONTRASENA
              FormFieldInput(
                suffixIcon: Icon(Icons.lock),
@@ -512,22 +505,26 @@ Widget _imageCard(BuildContext context) {
           child:SizedBox(
             width: 250.0,
             height: 210.0,
-            child:(_picture!=null)?
-                  Image.file(_picture,fit: BoxFit.fill):
-                  Image.network("https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
-                                        fit: BoxFit.fill,),
+            child: (_picture != null)
+                ? Image.file(_picture, fit: BoxFit.fill)
+                : Image.network(
+                    "https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
+                    fit: BoxFit.fill,
+                  ),
           ),
         ),
         SizedBox(height: 15.0),
-       Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child:SizedBox(
+        Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: SizedBox(
             width: 250.0,
             height: 210.0,
-            child:(_pictureCard!=null)?
-                  Image.file(_pictureCard,fit: BoxFit.fill):
-                  Image.network("https://image.flaticon.com/icons/png/512/455/455593.png",
-                                        fit: BoxFit.fill),
+            child: (_pictureCard != null)
+                ? Image.file(_pictureCard, fit: BoxFit.fill)
+                : Image.network(
+                    "https://image.flaticon.com/icons/png/512/455/455593.png",
+                    fit: BoxFit.fill),
           ),
         ),
         IconButton(
@@ -570,34 +567,33 @@ return Column(
           child:SizedBox(
             width: 300.0,
             height: 300.0,
-            child:(_gesturePicture!=null)?
-                  Image.file(_gesturePicture,fit: BoxFit.fill):
-                  Image.network("https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
-                                        fit: BoxFit.fill,),
+            child: (_gesturePicture != null)
+                ? Image.file(_gesturePicture, fit: BoxFit.fill)
+                : Image.network(
+                    "https://www.pngkey.com/png/full/52-522921_kathrine-vangen-profile-pic-empty-png.png",
+                    fit: BoxFit.fill,
+                  ),
           ),
         ),
         IconButton(
-                icon:Icon( 
-                  FontAwesomeIcons.camera,
-                  size: 30.0,
-                ),
-                onPressed: () async{
-                
-                 final picker=new ImagePicker();
+          icon: Icon(
+            FontAwesomeIcons.camera,
+            size: 30.0,
+          ),
+          onPressed: () async {
+            final picker = new ImagePicker();
 
-                 final PickedFile  pickedFile= await picker.getImage(
-                   source: ImageSource.camera
-                   ); 
+            final PickedFile pickedFile =
+                await picker.getImage(source: ImageSource.camera);
 
-                  if(pickedFile!=null){
-                  setState(() {
-                      _gesturePicture=File.fromUri(Uri(path:pickedFile.path)); 
-                     _uploadImage(context,pickedFile.path);     
-                 });
-                    }
-
-                },
-              ),
+            if (pickedFile != null) {
+              setState(() {
+                _gesturePicture = File.fromUri(Uri(path: pickedFile.path));
+                _uploadImage(context, pickedFile.path);
+              });
+            }
+          },
+        ),
         SizedBox(height: 5.0),
                 
     ],
@@ -613,4 +609,3 @@ return Column(
  }
 
 }
-
