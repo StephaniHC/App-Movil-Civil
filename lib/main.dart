@@ -15,12 +15,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-void main()  {
- 
+void main() {
   runApp(MyApp());
 
   SystemChrome.setSystemUIOverlayStyle(
-    
     SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.light,
@@ -71,12 +69,12 @@ class _MyAppState extends State<MyApp> {
           title: 'Denuncias Civil',
           navigatorKey: navigatorKey,
           // initialRoute: 'register_trabajador',
-          initialRoute: 'welcome',
+          initialRoute: 'loading1',
           routes: appRoutes,
-         //theme: ThemeData(primaryColor: Color.fromARGB(255, 255, 96, 0)),
-         theme:Themes().lightTheme,
-         darkTheme: Themes().darkTheme,
-         themeMode: ThemeService().getThemeMode(),
+          //theme: ThemeData(primaryColor: Color.fromARGB(255, 255, 96, 0)),
+          theme: Themes().lightTheme,
+          darkTheme: Themes().darkTheme,
+          themeMode: ThemeService().getThemeMode(),
         ));
   }
 }

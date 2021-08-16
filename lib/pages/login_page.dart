@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final passCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   _systemChromeColor(Brightness.dark);
+    _systemChromeColor(Brightness.dark);
     final size = MediaQuery.of(context).size;
     final color = Theme.of(context).primaryColor;
 
@@ -50,11 +50,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 _Form(),
                 SizedBox(height: 20),
-                Text(
-                  '¿Olvidaste tu contraseña?',
-                  style: TextStyle(
-                      fontSize: 14, color: Color.fromARGB(255, 124, 125, 126)),
-                ),
+                // Text(
+                //   '¿Olvidaste tu contraseña?',
+                //   style: TextStyle(
+                //       fontSize: 14, color: Color.fromARGB(255, 124, 125, 126)),
+                // ),
                 SizedBox(height: 30),
                 _noTienesCuenta(context),
                 SizedBox(
@@ -152,7 +152,6 @@ class __FormState extends State<_Form> {
               labelText: 'Email',
               keyboardType: TextInputType.emailAddress,
               textController: emailCtrl,
-              
             ),
             SizedBox(height: 20),
             FormFieldInput(
@@ -178,7 +177,7 @@ class __FormState extends State<_Form> {
 
                       final loginOk = await authService.login(
                           emailCtrl.text.trim(), passCtrl.text.trim());
-                          
+
                       if (loginOk) {
                         //   notificacion.guardarTokenFCMServices();
                         Navigator.pushNamedAndRemoveUntil(
@@ -187,7 +186,6 @@ class __FormState extends State<_Form> {
                         mostrarAlerta(context, 'Login incorrecto',
                             'Revise sus Credenciales');
                       }
-                      
                     },
             )
           ],

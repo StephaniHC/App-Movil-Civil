@@ -38,7 +38,7 @@ class AppNameWidget extends StatelessWidget {
         padding: EdgeInsets.all(15),
         alignment: Alignment.center,
         child: Text(
-          'SERVICIOS DE TRABAJOS',
+          'SERVICIO DE DENUNCIAS',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Color.fromARGB(255, 124, 125, 126),

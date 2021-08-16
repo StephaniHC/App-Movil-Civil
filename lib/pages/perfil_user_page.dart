@@ -88,8 +88,9 @@ class _PerfilPageState extends State<PerfilUserPage> {
           delegate: CustomSliverAppBar(
               expandedHeight: expandedHeight,
               title: '',
-              subtitle: usuario?.email ?? usuario.imagenUrl,
-              fotoUrl: usuario?.img ?? "",
+              subtitle:
+                  '${persona?.nombre} ${persona?.apellido}'.substring(0, 20),
+              fotoUrl: usuario?.img ?? usuario.imagenUrl,
               logout: () async {
                 // await notificacion.borrarTokenFCMServices();
                 authService.logout();
